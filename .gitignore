@@ -16,6 +16,8 @@ intelhexclass/doxygen/html/*
 intelhexclass/doxygen/latex/*
 intelhexclass/doxygen/rtf/*
 intelhexclass/doxygen/man/*
+.vscode/*
+CMakeFiles/*
 
 # Ignore extraneous Open Office files
 *.odt#
@@ -41,3 +43,8 @@ intelhexclass/doxygen/man/*
 *.obj
 *.log
 *.ipch
+
+#Ignore file
+Makefile
+cmake_install.cmake
+CMakeCache.txt

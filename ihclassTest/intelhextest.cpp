@@ -22,9 +22,6 @@ int main(int argc, char *argv[])
     // Create an input stream
 	std::ifstream intelHexInput;
 	
-	// Create an output stream
-	std::ofstream intelHexOutput;
-	
 	// Create a string to store lines of Intel Hex info
 	std::string intelHexLine;
 	
@@ -43,8 +40,8 @@ int main(int argc, char *argv[])
 	// The program name is the first argument - save for later use
 	program_name = argv[0];
 
-	// Make sure there are only <command> and 2 x <file> arguments	
-	if(argc != 3) {
+	// Make sure there are only <command> and 1 x <file> arguments	
+	if(argc != 2) {
     	usage();
     }
     	
@@ -56,14 +53,6 @@ int main(int argc, char *argv[])
     	usage();
 	}
 	
-	intelHexOutput.open(argv[2], ofstream::out);
-	
-	if(!intelHexOutput.good())
-	{
-    	std::cerr << "Error: couldn't open " << argv[2] << std::endl;
-    	usage();
-	}
-	
     cout << "Running IntelHEX Class Test" << endl;
     
     intelHexInput >> classTest;
@@ -72,7 +61,10 @@ int main(int argc, char *argv[])
 
     cout << "File contained " << classTest.getNoWarnings() << " warnings and "
          << classTest.getNoErrors() << " errors." << endl;
-    
+	unsigned char tempdata = 0;
+
+	classTest.getData(&tempdata);
+    cout<<"Data is 0x"<<setw(2) << setfill('0') << uppercase << hex<<tempdata<<endl;
     while (classTest.getNoErrors() > 0)
     {
         string message;
@@ -90,8 +82,6 @@ int main(int argc, char *argv[])
         
         cout << message << endl;
     }
-    
-    intelHexOutput << classTest;
 
     return(0);
 }
